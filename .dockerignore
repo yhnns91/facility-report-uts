@@ -1,0 +1,14 @@
+.git
+.gitignore
+.gitattributes
+README.md
+Jenkinsfile
+docker-compose.yml
+frontend
+nginx
+jenkins
+scripts
+docs
+__pycache__
+*.pyc
+.env
