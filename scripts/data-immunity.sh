@@ -15,7 +15,7 @@ jeda 3
 
 judul "2. Hapus paksa kontainer backend (docker rm -f)"
 cmd docker rm -f facility-backend
-echo "HTTP dari $BASE/reports saat backend tidak ada: $(curl -s -o /dev/null -w '%{http_code}' "$BASE/reports")  (502 = backend mati)"
+echo "HTTP dari $BASE/reports saat backend tidak ada: $(curl -s -o /dev/null -w '%{http_code}' "$BASE/reports")  (502/504 = backend tidak tersedia)"
 cmd docker volume ls --filter name=facility-data
 jeda 3
 

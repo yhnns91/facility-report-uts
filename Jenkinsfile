@@ -91,12 +91,26 @@ pipeline {
                       sleep 2
                     done
 
+                    # Nginx perlu 1-2 detik setelah kontainer dibuat ulang sebelum siap menerima koneksi,
+                    # jadi diuji berulang. Alamat 127.0.0.1 (IPv4) dipakai karena Nginx hanya listen di IPv4,
+                    # sedangkan "localhost" bisa diarahkan ke ::1 (IPv6).
                     echo "--- Uji API lewat reverse proxy Nginx (/api/reports) ---"
-                    docker exec ${FRONTEND_CONTAINER} wget -qO- http://localhost/api/reports
-                    echo ""
+                    for i in $(seq 1 15); do
+                      if docker exec ${FRONTEND_CONTAINER} wget -qO- http://127.0.0.1/api/reports; then
+                        echo ""
+                        echo "Reverse proxy Nginx /api -> backend: OK (percobaan ke-$i)"
+                        break
+                      fi
+                      if [ "$i" -eq 15 ]; then
+                        echo "Nginx tidak merespons setelah 15 percobaan"
+                        docker compose logs --tail 50 frontend
+                        exit 1
+                      fi
+                      sleep 2
+                    done
 
                     echo "--- Uji halaman frontend dari bind mount ---"
-                    docker exec ${FRONTEND_CONTAINER} wget -qO- http://localhost/ | grep -q "Laporan Kerusakan Fasilitas Kampus"
+                    docker exec ${FRONTEND_CONTAINER} wget -qO- http://127.0.0.1/ | grep -q "Laporan Kerusakan Fasilitas Kampus"
                     echo "Frontend tersaji oleh Nginx: OK"
                     docker exec ${FRONTEND_CONTAINER} nginx -t
 
