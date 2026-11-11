@@ -8,10 +8,10 @@ dijalankan dengan Docker Compose dan di-deploy otomatis oleh Jenkins setiap ada 
 
 | No | Nama | NIM | Peran |
 |---|---|---|---|
-| 1 | Yohannes Novensius Sirait | 101012300348 | (isi peran) |
-| 2 | (isi nama) | (isi NIM) | (isi peran) |
-| 3 | (isi nama) | (isi NIM) | (isi peran) |
-| 4 | (isi nama, hapus baris ini jika 3 orang) | (isi NIM) | (isi peran) |
+| 1 | Yohannes Novensius Sirait | 101012300348 | DevOps (Jenkins, GitHub, dll) |
+| 2 | Dimas Reza Maulana | 101012300108 | FrontEnd |
+| 3 | Putri Ardelia Nafisa | 101012300181 | BackEnd |
+| 4 | Yulya Rahayu Sidabutar | 101012330286 | DevOps (Jenkins, GitHub, dll) |
 
 **Studi kasus:** No. 8 - Laporan Kerusakan Fasilitas Kampus (Facility Issue Reporting)
 
